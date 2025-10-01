@@ -1,17 +1,17 @@
-import { secretkey } from '../config.js'
-import jwt from 'jsonwebtoken'
+import { secretkey } from '../config.js';
+import jwt from 'jsonwebtoken';
 export function createAccessToken(payload) {
   return new Promise((resolve, reject) => {
     jwt.sign(
       payload,
-      secretkey,
+      process.env.secretkey || secretkey,
       {
-        expiresIn: '1d'
+        expiresIn: '1d',
       },
       (err, token) => {
-        if (err) reject(err)
-        resolve(token)
+        if (err) reject(err);
+        resolve(token);
       }
-    )
-  })
+    );
+  });
 }

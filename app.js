@@ -10,7 +10,7 @@ import { connnectDB } from './Db.js';
 
 const allowedOrigins =
   process.env.NODE_ENV === 'production'
-    ? 'https://front-ent-sell-all.vercel.app/'
+    ? 'https://front-ent-sell-all.vercel.app'
     : 'http://localhost:5173';
 
 app.use(
