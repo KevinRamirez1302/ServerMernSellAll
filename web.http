@@ -1,0 +1,25 @@
+#### Get 
+
+GET http://localhost:3000/getProducts
+
+### Obtener producto por id
+
+GET http://localhost:3000/Products/1
+
+### Login
+POST http://localhost:3000/login
+
+ {
+    "email": "kevin.ramirez99@hotmail.com",
+    "password":"akalatronic"
+ }
+
+### register 
+
+GET http://localhost:3000/profile
+
+{
+    "name":"Kevin",
+    "email": "kevin@email.com",
+    "password":"asdasd"
+}

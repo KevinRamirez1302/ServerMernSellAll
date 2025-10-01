@@ -1,0 +1,26 @@
+[{
+    "productos": [
+      {
+        "id": "1",
+        "nombre": "Camiseta",
+        "descripcion": "Camiseta de algodón con cuello redondo y manga corta.",
+        "precio": 19.99,
+        "imagen": "https://ejemplo.com/camiseta.jpg"
+      },
+      {
+        "id": "2",
+        "nombre": "Pantalones",
+        "descripcion": "Pantalones vaqueros ajustados con cinco bolsillos.",
+        "precio": 49.99,
+        "imagen": "https://ejemplo.com/pantalones.jpg"
+      },
+      {
+        "id": "3",
+        "nombre": "Zapatos",
+        "descripcion": "Zapatos deportivos con suela de goma y cordones.",
+        "precio": 79.99,
+        "imagen": "https://ejemplo.com/zapatos.jpg"
+      }
+    ]
+  }]
+  
