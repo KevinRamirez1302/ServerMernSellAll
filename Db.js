@@ -5,7 +5,7 @@ config();
 export const connnectDB = async () => {
   try {
     await mongoose.connect(
-      `mongodb+srv://${process.env.DBUSER}:${process.env.DBPASSWORD}@cluster0.xg7o66k.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`
+      `mongodb+srv://KevinAlexander13:${process.env.DBPASSWORD}@cluster0.xg7o66k.mongodb.net/SellAll?retryWrites=true&w=majority&appName=Cluster0`
     );
     console.log('DB is connected');
   } catch (err) {

@@ -10,12 +10,13 @@ import { connnectDB } from './Db.js';
 
 const allowedOrigins =
   process.env.NODE_ENV === 'production'
-    ? 'https://ecommerce-mern-tan.vercel.app'
+    ? 'https://front-ent-sell-all.vercel.app/'
     : 'http://localhost:5173';
 
 app.use(
   cors({
     origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   })
 );
