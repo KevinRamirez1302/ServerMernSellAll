@@ -8,7 +8,7 @@ import productRoutes from './Routes/product.route.js';
 import shopCarRoutes from './Routes/shopCar.route.js';
 import { connnectDB } from './Db.js';
 
-const allowedOrigins = process.env.URL_LOCAL || process.env.URL_DEPLOY;
+const allowedOrigins = [process.env.URL_LOCAL, process.env.URL_DEPLOY;]
 
 app.use(
   cors({
