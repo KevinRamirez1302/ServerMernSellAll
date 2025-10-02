@@ -8,10 +8,7 @@ import productRoutes from './Routes/product.route.js';
 import shopCarRoutes from './Routes/shopCar.route.js';
 import { connnectDB } from './Db.js';
 
-const allowedOrigins =
-  process.env.NODE_ENV === 'production'
-    ? 'https://front-ent-sell-all.vercel.app'
-    : 'http://localhost:5173';
+const allowedOrigins = process.env.URL_LOCAL || process.env.URL_DEPLOY;
 
 app.use(
   cors({
