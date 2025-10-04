@@ -4,6 +4,20 @@ import { createAccessToken } from '../Libs/jwt.js';
 import jwt from 'jsonwebtoken';
 import { logicKey } from '../Middlewares/validateToken.js';
 
+// Cookie options centralization
+// In production we need SameSite=None and Secure=true for cross-site cookies.
+// In development (localhost) Secure must be false so the browser accepts the cookie over HTTP.
+const cookieOptions = {
+  httpOnly: true,
+  path: '/',
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  secure: process.env.NODE_ENV === 'production',
+  // maxAge set to 1 day; adjust as needed
+  maxAge: 24 * 60 * 60 * 1000,
+  // domain can be set when you want to share cookie across subdomains, e.g. '.midominio.com'
+  domain: process.env.COOKIE_DOMAIN || undefined,
+};
+
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
   const userFound = await userModel.findOne({ email });
@@ -22,12 +36,7 @@ export const register = async (req, res) => {
 
     const saveUser = await newUser.save();
     const token = await createAccessToken({ id: saveUser._id });
-    res.cookie('token', token, {
-      maxAge: 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      secure: true,
-      sameSite: 'Strict',
-    });
+    res.cookie('token', token, cookieOptions);
 
     res.json({
       id: saveUser._id,
@@ -49,12 +58,7 @@ export const login = async (req, res) => {
     if (!isMatch) return res.status(400).json(['Incorrect password']);
 
     const token = await createAccessToken({ id: userFound._id });
-    res.cookie('token', token, {
-      maxAge: 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      secure: true,
-      sameSite: 'Strict',
-    });
+    res.cookie('token', token, cookieOptions);
 
     res.json({
       id: userFound._id,
@@ -77,10 +81,8 @@ export const profile = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.cookie('token', '', {
-    expires: new Date(0),
-  });
-
+  // Use clearCookie with same options so the browser recognises and removes it
+  res.clearCookie('token', { ...cookieOptions, maxAge: 0 });
   return res.sendStatus(200);
 };
 
