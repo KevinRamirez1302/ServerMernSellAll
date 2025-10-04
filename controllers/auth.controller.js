@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { createAccessToken } from '../Libs/jwt.js';
 import jwt from 'jsonwebtoken';
 import { logicKey } from '../Middlewares/validateToken.js';
+
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
   const userFound = await userModel.findOne({ email });
@@ -21,11 +22,7 @@ export const register = async (req, res) => {
 
     const saveUser = await newUser.save();
     const token = await createAccessToken({ id: saveUser._id });
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: true, // ¡CRUCIAL! Solo se enviará en HTTPS
-      sameSite: 'none',
-    });
+    res.cookie('token', token);
 
     res.json({
       id: saveUser._id,
@@ -47,11 +44,7 @@ export const login = async (req, res) => {
     if (!isMatch) return res.status(400).json(['Incorrect password']);
 
     const token = await createAccessToken({ id: userFound._id });
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none',
-    });
+    res.cookie('token', token);
 
     res.json({
       id: userFound._id,

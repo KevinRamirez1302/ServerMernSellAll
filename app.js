@@ -24,6 +24,14 @@ app.use(shopCarRoutes);
 app.use(productRoutes);
 
 connnectDB();
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+server.on('error', (err) => {
+  if (err && err.code === 'EADDRINUSE') {
+    console.error(`Port ${PORT} is already in use. Close the other process or set a different PORT.`);
+    process.exit(1);
+  }
+  console.error('Server error:', err);
 });
