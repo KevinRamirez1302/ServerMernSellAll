@@ -24,6 +24,8 @@ export const register = async (req, res) => {
     const token = await createAccessToken({ id: saveUser._id });
     res.cookie('token', token, {
       maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: true,
     });
 
     res.json({
@@ -48,6 +50,8 @@ export const login = async (req, res) => {
     const token = await createAccessToken({ id: userFound._id });
     res.cookie('token', token, {
       maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: true,
     });
 
     res.json({
