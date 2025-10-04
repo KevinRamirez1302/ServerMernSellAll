@@ -1,10 +1,10 @@
-import { secretkey } from '../config.js';
 import jwt from 'jsonwebtoken';
+import { logicKey } from '../Middlewares/validateToken.js';
 export function createAccessToken(payload) {
   return new Promise((resolve, reject) => {
     jwt.sign(
       payload,
-      process.env.secretkey || secretkey,
+      logicKey,
       {
         expiresIn: '1d',
       },

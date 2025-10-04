@@ -1,7 +1,7 @@
 import { secretkey } from '../config.js';
 import jwt from 'jsonwebtoken';
 
-const logicKey = secretkey || process.env.secretkey;
+export const logicKey = secretkey || process.env.secretkey;
 
 export const authRequired = (req, res, next) => {
   const { token } = req.cookies;
