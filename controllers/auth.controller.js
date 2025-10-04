@@ -26,6 +26,7 @@ export const register = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: true,
+      sameSite: 'Strict',
     });
 
     res.json({
@@ -52,6 +53,7 @@ export const login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: true,
+      sameSite: 'Strict',
     });
 
     res.json({
