@@ -4,22 +4,7 @@
 
 API REST para el sistema de ventas SellAll. Proporciona endpoints para autenticación de usuarios, gestión de productos y carrito de compras.
 
-## 🛠 Configuración
 
-### Variables de Entorno
-
-Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
-
-```env
-DBNAME="SellAll"
-DBPASSWORD="tu_password"
-DBUSER="tu_usuario"
-secretkey="tu_secret_key"
-URL_LOCAL="http://localhost:5173"
-URL_DEPLOY="https://tu-dominio.com"
-N8N_TEST="https://tu-n8n.app/webhook-test/Send-Welcome"
-N8N_PRODUCTION="https://tu-n8n.app/webhook/Send-Welcome"
-```
 
 ### Instalación
 
