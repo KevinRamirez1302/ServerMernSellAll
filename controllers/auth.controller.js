@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { createAccessToken } from '../Libs/jwt.js';
 import jwt from 'jsonwebtoken';
 import { logicKey } from '../Middlewares/validateToken.js';
+import { welcomeN8N } from '../utilities/welcomeN8N.js';
 
 // Cookie options centralization
 // In production we need SameSite=None and Secure=true for cross-site cookies.
@@ -37,6 +38,17 @@ export const register = async (req, res) => {
     const saveUser = await newUser.save();
     const token = await createAccessToken({ id: saveUser._id });
     res.cookie('token', token, cookieOptions);
+
+    try {
+      await welcomeN8N({
+        name: saveUser.name,
+        email: saveUser.email,
+      });
+      console.log('Correo de bienvenida enviado correctamente');
+    } catch (error) {
+      console.error('Error al enviar correo de bienvenida:', error);
+      // Continuamos aunque falle el envío del correo
+    }
 
     res.json({
       id: saveUser._id,
